@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YOSSI150 — coupon code for islo.dev | Everything coding agents need</title>
+<meta name="description" content="Use coupon code YOSSI150 on islo.dev — secure, persistent cloud sandboxes for AI coding agents. $50 in free credits on signup, no card required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070b09;
+    --bg-raise: #0c120e;
+    --bg-panel: #0a100c;
+    --line: #1c2a20;
+    --line-bright: #2a4032;
+    --ink: #d7e4da;
+    --ink-dim: #9fb3a5;
+    --ink-faint: #66796c;
+    --green: #46e08c;
+    --green-dim: #2f9c61;
+    --amber: #e8b34b;
+    --red: #e06c5a;
+    --cyan: #5ad4e0;
+    --maxw: 1080px;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ambient phosphor glow + scanlines */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(70, 224, 140, 0.07), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 85% 100%, rgba(90, 212, 224, 0.04), transparent 60%);
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 2px,
+      rgba(0, 0, 0, 0.13) 3px
+    );
+    mix-blend-mode: multiply;
+  }
+
+  main, header, footer { position: relative; z-index: 2; }
+
+  a { color: var(--green); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--ink); }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  ::selection { background: var(--green); color: #04130a; }
+
+  /* ---------- top bar ---------- */
+  .topbar {
+    border-bottom: 1px solid var(--line);
+    background: rgba(7, 11, 9, 0.85);
+    backdrop-filter: blur(6px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .topbar .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+    gap: 16px;
+  }
+  .topbar .sig { font-size: 13px; color: var(--ink-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .topbar .sig b { color: var(--green); font-weight: 600; }
+  .topbar a.mini-cta {
+    font-size: 12px;
+    color: var(--bg);
+    background: var(--green);
+    text-decoration: none;
+    padding: 6px 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    border: 1px solid var(--green);
+  }
+  .topbar a.mini-cta:hover { background: transparent; color: var(--green); }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 72px 0 56px; }
+
+  .crumb {
+    color: var(--ink-faint);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    animation: rise 0.6s ease both;
+  }
+  .crumb .ok { color: var(--green); }
+
+  h1 {
+    font-size: clamp(26px, 4.2vw, 44px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 18px 0 14px;
+    max-width: 21ch;
+    animation: rise 0.6s 0.08s ease both;
+  }
+  h1 .dim { color: var(--ink-faint); font-weight: 400; }
+
+  .hero p.pitch {
+    color: var(--ink-dim);
+    max-width: 62ch;
+    animation: rise 0.6s 0.16s ease both;
+  }
+  .hero p.pitch b { color: var(--ink); font-weight: 600; }
+
+  /* coupon terminal */
+  .term {
+    margin: 40px 0 28px;
+    border: 1px solid var(--line-bright);
+    background: var(--bg-panel);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.4), 0 24px 60px -20px rgba(70, 224, 140, 0.12);
+    animation: rise 0.6s 0.24s ease both;
+  }
+  .term-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-faint);
+    font-size: 12px;
+  }
+  .term-head .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line-bright); }
+  .term-head .dot.r { background: #5c3530; }
+  .term-head .dot.y { background: #5c4d2a; }
+  .term-head .dot.g { background: #2a523c; }
+  .term-head .title { margin-left: 8px; }
+
+  .term-body { padding: 26px 26px 30px; }
+  .term-body .cmd { color: var(--ink-faint); font-size: 14px; margin-bottom: 6px; }
+  .term-body .cmd .prompt { color: var(--green-dim); }
+  .term-body .cmd .flag { color: var(--cyan); }
+
+  button.code {
+    display: block;
+    width: 100%;
+    font-family: var(--mono);
+    font-size: clamp(44px, 10vw, 104px);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--green);
+    background: transparent;
+    border: 1px dashed var(--line-bright);
+    padding: 18px 12px 22px;
+    margin: 14px 0 12px;
+    cursor: pointer;
+    text-shadow: 0 0 22px rgba(70, 224, 140, 0.35);
+    transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+    line-height: 1.1;
+  }
+  button.code:hover, button.code:focus-visible {
+    border-color: var(--green);
+    background: rgba(70, 224, 140, 0.05);
+    outline: none;
+  }
+  button.code:active { transform: scale(0.99); }
+  button.code .caret { animation: blink 1.1s steps(1) infinite; font-weight: 400; }
+
+  .copy-hint { font-size: 13px; color: var(--ink-faint); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .copy-hint .status { color: var(--ink-faint); transition: color 0.2s; }
+  .copy-hint .status.ok { color: var(--green); }
+
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+    animation: rise 0.6s 0.32s ease both;
+  }
+  a.cta {
+    display: inline-block;
+    background: var(--green);
+    color: #04130a;
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 14px 28px;
+    border: 1px solid var(--green);
+    box-shadow: 0 0 30px -6px rgba(70, 224, 140, 0.45);
+    transition: background 0.15s, color 0.15s;
+  }
+  a.cta:hover { background: transparent; color: var(--green); }
+  .cta-row .fine { font-size: 13px; color: var(--ink-faint); }
+  .cta-row .fine b { color: var(--amber); font-weight: 600; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ---------- sections ---------- */
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+
+  .sec-label {
+    color: var(--ink-faint);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+  .sec-label::before { content: "## "; color: var(--green-dim); }
+
+  h2 {
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 18px;
+    max-width: 30ch;
+  }
+
+  .lede { color: var(--ink-dim); max-width: 66ch; }
+  .lede b, .lede strong { color: var(--ink); font-weight: 600; }
+  .lede + .lede { margin-top: 14px; }
+
+  /* gateway log */
+  .log {
+    margin-top: 30px;
+    border: 1px solid var(--line);
+    background: var(--bg-panel);
+    padding: 18px 20px;
+    font-size: 13.5px;
+    overflow-x: auto;
+  }
+  .log .ln { white-space: pre; display: block; }
+  .log .t { color: var(--ink-faint); }
+  .log .ok { color: var(--green); }
+  .log .warn { color: var(--amber); }
+  .log .deny { color: var(--red); }
+  .log .k { color: var(--cyan); }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-top: 30px;
+  }
+  .pillar { background: var(--bg-raise); padding: 22px; }
+  .pillar h3 { font-size: 15px; font-weight: 600; color: var(--green); margin-bottom: 8px; }
+  .pillar h3::before { content: "▸ "; color: var(--green-dim); }
+  .pillar p { font-size: 13.5px; color: var(--ink-dim); }
+  .pillar p code { color: var(--ink); }
+
+  code {
+    font-family: var(--mono);
+    background: rgba(70, 224, 140, 0.07);
+    border: 1px solid var(--line);
+    padding: 1px 5px;
+    font-size: 0.92em;
+    color: var(--green);
+  }
+
+  /* ---------- personas ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+    margin-top: 34px;
+  }
+  .card {
+    grid-column: span 2;
+    border: 1px solid var(--line);
+    background: var(--bg-panel);
+    padding: 24px 22px 26px;
+    position: relative;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .card:nth-child(4) { grid-column: 1 / span 3; }
+  .card:nth-child(5) { grid-column: 4 / span 3; }
+  .card:hover { border-color: var(--green-dim); transform: translateY(-3px); }
+  .card .idx {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    color: var(--ink-faint);
+    font-size: 12px;
+  }
+  .card .who {
+    color: var(--amber);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .card .who::before { content: "$ whoami → "; color: var(--ink-faint); text-transform: none; letter-spacing: 0; }
+  .card h3 { font-size: 16px; font-weight: 600; margin-bottom: 10px; line-height: 1.4; }
+  .card p { font-size: 13.5px; color: var(--ink-dim); }
+  .card p code { font-size: 12.5px; }
+
+  /* ---------- crabbox ---------- */
+  .crab {
+    border: 1px solid var(--line);
+    background: var(--bg-panel);
+    padding: 28px;
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+  .crab pre {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 18px;
+    font-size: 13px;
+    overflow-x: auto;
+    color: var(--ink-dim);
+  }
+  .crab pre .c { color: var(--ink-faint); }
+  .crab pre .g { color: var(--green); }
+  .crab p { font-size: 14px; color: var(--ink-dim); }
+  .crab p + p { margin-top: 12px; }
+  .crab h3 { font-size: 17px; margin-bottom: 12px; }
+  .crab h3 .crabmoji { filter: hue-rotate(0deg); }
+
+  /* ---------- pricing strip ---------- */
+  .prices {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 30px;
+  }
+  .price {
+    border: 1px solid var(--line);
+    background: var(--bg-panel);
+    padding: 20px;
+    text-align: left;
+  }
+  .price .num { font-size: 26px; font-weight: 700; color: var(--ink); }
+  .price .num small { font-size: 13px; color: var(--ink-faint); font-weight: 400; }
+  .price .what { font-size: 13px; color: var(--ink-dim); margin-top: 4px; }
+  .examples { margin-top: 18px; font-size: 13.5px; color: var(--ink-faint); }
+  .examples b { color: var(--amber); font-weight: 600; }
+
+  /* ---------- final cta ---------- */
+  .final { text-align: center; padding: 84px 0; }
+  .final h2 { margin: 0 auto 14px; }
+  .final .lede { margin: 0 auto 30px; }
+  .final .bigcode {
+    font-size: clamp(30px, 6vw, 56px);
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.06em;
+    text-shadow: 0 0 26px rgba(70, 224, 140, 0.4);
+    margin-bottom: 26px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: var(--mono);
+  }
+  .final .bigcode:hover { text-decoration: underline dashed; text-underline-offset: 8px; text-decoration-thickness: 1px; }
+
+  /* ---------- footer ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 30px 0 44px;
+    color: var(--ink-faint);
+    font-size: 13px;
+  }
+  footer .wrap { display: flex; flex-direction: column; gap: 8px; }
+  footer .redeem { color: var(--ink-dim); }
+  footer .redeem b { color: var(--green); font-weight: 600; }
+
+  .skip {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--green);
+    color: var(--bg);
+    padding: 8px 16px;
+    z-index: 100;
+  }
+  .skip:focus { left: 8px; top: 8px; }
+
+  /* live region for copy feedback (visually present in hint already) */
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 880px) {
+    .pillars { grid-template-columns: 1fr; }
+    .grid { grid-template-columns: 1fr 1fr; }
+    .card, .card:nth-child(4), .card:nth-child(5) { grid-column: span 1; }
+    .crab { grid-template-columns: 1fr; }
+    .prices { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .grid { grid-template-columns: 1fr; }
+    .hero { padding: 48px 0 40px; }
+    section { padding: 48px 0; }
+    .term-body { padding: 18px 16px 22px; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#what">Skip to content</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="sig">islo-gateway <b>::</b> promo/<b>YOSSI150</b> <span aria-hidden="true">— session active</span></div>
+    <a class="mini-cta" href="https://islo.dev/?coupon=YOSSI150&utm_source=yossi150&utm_campaign=yossi150">islo.dev →</a>
+  </div>
+</header>
+
+<main>
+  <!-- ============ HERO ============ -->
+  <div class="hero wrap">
+    <p class="crumb">[<span class="ok">OK</span>] coupon.service — code loaded · scope=islo.dev · status=<span class="ok">active</span></p>
+
+    <h1>A coupon code for the place your coding agents <span class="dim">actually</span> run.</h1>
+
+    <p class="pitch">
+      <a href="https://islo.dev/?coupon=YOSSI150&utm_source=yossi150&utm_campaign=yossi150">islo.dev</a>
+      gives AI coding agents persistent, secure cloud computers — real Linux VMs with a security
+      gateway in front, built by the team behind <b>Incredibuild</b>.
+      Tagline, verbatim: <b>“Everything coding agents need.”</b>
+    </p>
+
+    <div class="term" role="group" aria-label="Coupon code terminal">
+      <div class="term-head" aria-hidden="true">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="title">yossi@islo:~/promo — coupon.txt</span>
+      </div>
+      <div class="term-body">
+        <p class="cmd" aria-hidden="true"><span class="prompt">$</span> islo redeem <span class="flag">--code</span></p>
+        <button class="code" id="copyBtn" type="button" aria-label="Copy coupon code YOSSI150 to clipboard">YOSSI150<span class="caret" aria-hidden="true">_</span></button>
+        <div class="copy-hint">
+          <span>↳ click the code to copy it</span>
+          <span class="status" id="copyStatus" aria-hidden="true">clipboard: empty</span>
+        </div>
+        <span class="sr-only" id="copyLive" role="status" aria-live="polite"></span>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <a class="cta" href="https://islo.dev/?coupon=YOSSI150&utm_source=yossi150&utm_campaign=yossi150">Start your computer →</a>
+      <span class="fine">islo.dev offers <b>$50 in free credits</b> on signup · no card required</span>
+    </div>
+  </div>
+
+  <!-- ============ WHAT IS ISLO ============ -->
+  <section id="what">
+    <div class="wrap">
+      <p class="sec-label">what_is_islo</p>
+      <h2>Never heard of islo.dev? Sixty-second briefing.</h2>
+      <p class="lede">
+        Islo is a cloud sandbox platform for AI coding agents from <b>Incredibuild Software Ltd.</b>
+        Instead of letting Claude, Codex, or Cursor agents loose on your laptop — or inside a flaky
+        docker-in-docker container — Islo gives each agent a persistent, isolated <b>“computer”</b>:
+        a real Linux VM where Postgres, Redis, your API, and your dev services run on localhost, 24/7.
+      </p>
+      <p class="lede">
+        The part that makes security teams exhale: every agent sits behind a <b>security gateway</b>.
+        The agent only ever sees placeholder credentials; real secrets are injected at the network
+        egress, with a per-request audit trail. Oversized API responses get trimmed before they hit
+        the agent’s context, and deny policies block risky or exfiltration-shaped requests outright.
+      </p>
+
+      <div class="log" role="img" aria-label="Illustrative gateway log: secrets injected at egress, oversized response trimmed, exfiltration attempt denied">
+<span class="ln"><span class="t">12:04:01</span> <span class="ok">ALLOW</span>  POST api.stripe.com/v1/charges      <span class="k">secret:injected@egress</span>  audit:✓</span>
+<span class="ln"><span class="t">12:04:07</span> <span class="warn">TRIM </span>  GET  api.github.com/repos/…/issues   <span class="k">response 2.1MB → 64KB</span>   audit:✓</span>
+<span class="ln"><span class="t">12:04:13</span> <span class="deny">DENY </span>  POST paste-bin.example/upload        <span class="k">policy:exfiltration</span>     audit:✓</span>
+      </div>
+
+      <div class="pillars">
+        <div class="pillar">
+          <h3>Security gateway</h3>
+          <p>Agents never hold real credentials. Secrets swap in at egress, per-request audit, deny policies for banned hosts and exfiltration patterns.</p>
+        </div>
+        <div class="pillar">
+          <h3>Real persistent environments</h3>
+          <p>Actual Linux VMs — “not docker-in-docker.” Services, disk, and git state stay warm between sessions.</p>
+        </div>
+        <div class="pillar">
+          <h3>Session resume</h3>
+          <p>Stop tonight, resume tomorrow. In Islo’s own words: “Same filesystem. Same history. Same context.”</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PERSONAS ============ -->
+  <section id="personas">
+    <div class="wrap">
+      <p class="sec-label">who_uses_this</p>
+      <h2>Five engineers, five reasons to type YOSSI150.</h2>
+      <p class="lede">
+        Each card maps to something Islo actually showcases: agent verification, 24/7 ticket triage,
+        and untrusted code execution — running on persistent VMs behind the gateway.
+      </p>
+
+      <div class="grid">
+        <article class="card">
+          <span class="idx" aria-hidden="true">01/05</span>
+          <p class="who">software developer</p>
+          <h3>Run agents overnight without leaving your laptop on.</h3>
+          <p>Kick off a long agent session on a persistent Islo computer and close the lid. Islo’s own worked example: an 8-hour overnight agent session costs about <code>$2.46</code>. Resume in the morning — same filesystem, same history, same context.</p>
+        </article>
+
+        <article class="card">
+          <span class="idx" aria-hidden="true">02/05</span>
+          <p class="who">devops engineer</p>
+          <h3>Give agents infrastructure access without giving them secrets.</h3>
+          <p>The gateway hands agents placeholder credentials and injects the real ones at egress, with a per-request audit log. Deny policies block exfiltration and banned hosts — so an agent can deploy and debug without ever holding a key.</p>
+        </article>
+
+        <article class="card">
+          <span class="idx" aria-hidden="true">03/05</span>
+          <p class="who">software engineer</p>
+          <h3>Verify agent-written code before you trust it.</h3>
+          <p>“Ship code you can trust” is one of Islo’s three headline use cases: run agent-generated changes in an isolated environment with real services on localhost — Postgres, Redis, your API — and check behavior before anything merges.</p>
+        </article>
+
+        <article class="card">
+          <span class="idx" aria-hidden="true">04/05</span>
+          <p class="who">ml engineer</p>
+          <h3>Execute untrusted, model-generated code safely.</h3>
+          <p>Code interpreters and user plugins mean running code you didn’t write and can’t fully review. Islo’s untrusted-code-execution use case isolates it in a real VM — not your training box, not a shared cluster — with the gateway policing every outbound request.</p>
+        </article>
+
+        <article class="card">
+          <span class="idx" aria-hidden="true">05/05</span>
+          <p class="who">ai software engineer</p>
+          <h3>Put an agent on the support queue, 24/7.</h3>
+          <p>Islo’s ticket-triage pattern: agents pick up Linear or Jira tickets around the clock and open PRs from their own persistent computers. Drive it from code with the SDKs — <code>uv add islo</code>, <code>npm install @islo-labs/sdk</code>, or the Go SDK.</p>
+        </article>
+
+        <article class="card" style="border-style: dashed;">
+          <span class="idx" aria-hidden="true">++/05</span>
+          <p class="who">you, in 90 seconds</p>
+          <h3>Install, log in, start a computer.</h3>
+          <p><code>curl -fsSL https://islo.dev/install.sh | bash</code> on macOS or Linux, then <code>islo login</code> and <code>islo use &lt;name&gt;</code>. Don’t forget the code: <code>YOSSI150</code>.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRICING ============ -->
+  <section id="pricing">
+    <div class="wrap">
+      <p class="sec-label">cost_of_running</p>
+      <h2>Usage-based pricing, published on the homepage.</h2>
+      <p class="lede">You pay for what your computers actually consume. Rates as listed on islo.dev:</p>
+      <div class="prices">
+        <div class="price"><div class="num">$0.07 <small>/ CPU-hour</small></div><div class="what">provisioned cores</div></div>
+        <div class="price"><div class="num">$0.04 <small>/ GB-hour</small></div><div class="what">memory</div></div>
+        <div class="price"><div class="num">$0.0007 <small>/ GB-hour</small></div><div class="what">storage</div></div>
+      </div>
+      <p class="examples">Islo’s own examples: an 8-hour overnight agent session ≈ <b>$2.46</b> · a 5-dev team at ~4h/day ≈ <b>$126/mo</b> · plus <b>$50 in free credits</b> on signup, no card required.</p>
+    </div>
+  </section>
+
+  <!-- ============ CRABBOX ============ -->
+  <section id="crabbox">
+    <div class="wrap">
+      <p class="sec-label">related_tooling</p>
+      <h2>Pairs well with crabbox.sh.</h2>
+      <div class="crab">
+        <div>
+          <h3><span class="crabmoji" aria-hidden="true">🦀</span> Warm a box, sync the diff, run the suite.</h3>
+          <p><a href="https://crabbox.sh">Crabbox</a> is an open-source (MIT) remote test-execution control plane from the OpenClaw project: lease a throwaway cloud machine, sync your uncommitted working tree, run the command remotely, stream the output back, release. Built for the “too many agents, too many test suites, one very tired Mac” problem.</p>
+          <p>The connection: <b>islo.dev is one of crabbox’s delegated-run providers</b>. Point crabbox at Islo with an <code>ISLO_API_KEY</code> and it hands the whole sandbox lifecycle to Islo’s API — no SSH, no broker. Your Islo credits (hello, <code>YOSSI150</code>) power the boxes underneath.</p>
+        </div>
+        <pre aria-label="Crabbox quick start commands"><span class="c"># install</span>
+<span class="g">$</span> brew install openclaw/tap/crabbox
+
+<span class="c"># run your suite on a remote box</span>
+<span class="g">$</span> crabbox run -- pnpm test
+<span class="c">→ lease blue-lobster · sync diff
+→ streaming stdout… · release</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="final">
+    <div class="wrap">
+      <p class="sec-label" style="text-align:center;">redeem</p>
+      <h2 style="margin-left:auto;margin-right:auto;">Your agents need a computer. Here’s the code.</h2>
+      <p class="lede" style="text-align:center;">Copy it now — checkout is exactly one click away.</p>
+      <button class="bigcode" type="button" data-copy aria-label="Copy coupon code YOSSI150 to clipboard">YOSSI150</button>
+      <div>
+        <a class="cta" href="https://islo.dev/?coupon=YOSSI150&utm_source=yossi150&utm_campaign=yossi150">Start your computer →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="redeem">Code <b>YOSSI150</b> — redeem at checkout on <a href="https://islo.dev/?coupon=YOSSI150&utm_source=yossi150&utm_campaign=yossi150">islo.dev</a>.</p>
+    <p>Unofficial promo page. Islo is a product of Incredibuild Software Ltd. Product facts sourced from islo.dev, docs.islo.dev, and launch press coverage. Crabbox is an MIT-licensed OpenClaw project.</p>
+    <p aria-hidden="true">[<span style="color:var(--green)">OK</span>] end of transmission — exit 0</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var CODE = "YOSSI150";
+  var status = document.getElementById("copyStatus");
+  var live = document.getElementById("copyLive");
+  var timer;
+
+  function fallbackCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  function feedback(ok) {
+    if (status) {
+      status.textContent = ok ? "clipboard: YOSSI150 ✓ copied" : "copy failed — select it manually";
+      status.classList.toggle("ok", ok);
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        status.textContent = "clipboard: empty";
+        status.classList.remove("ok");
+      }, 3000);
+    }
+    if (live) live.textContent = ok ? "Coupon code YOSSI150 copied to clipboard" : "Copy failed";
+  }
+
+  function copy() {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(CODE).then(
+        function () { feedback(true); },
+        function () { feedback(fallbackCopy(CODE)); }
+      );
+    } else {
+      feedback(fallbackCopy(CODE));
+    }
+  }
+
+  var btn = document.getElementById("copyBtn");
+  if (btn) btn.addEventListener("click", copy);
+  document.querySelectorAll("[data-copy]").forEach(function (el) {
+    el.addEventListener("click", copy);
+  });
+})();
+</script>
+</body>
+</html>
