@@ -15,14 +15,14 @@ From this directory (already a git repo with one commit):
 gh repo create yossi-islo-promo --public --source=. --push
 ```
 
-That creates `https://github.com/USERNAME/yossi-islo-promo` and pushes `main`.
+That creates `https://github.com/zozo123/yossi-islo-promo` and pushes `main`.
 
 <details>
 <summary>Manual alternative (without gh)</summary>
 
 1. Create an empty public repo named `yossi-islo-promo` on github.com (no README/license).
 2. ```bash
-   git remote add origin https://github.com/USERNAME/yossi-islo-promo.git
+   git remote add origin https://github.com/zozo123/yossi-islo-promo.git
    git push -u origin main
    ```
 </details>
@@ -38,7 +38,7 @@ Either via the UI:
 Or via the gh CLI:
 
 ```bash
-gh api -X POST repos/USERNAME/yossi-islo-promo/pages \
+gh api -X POST repos/zozo123/yossi-islo-promo/pages \
   -f "source[branch]=main" -f "source[path]=/"
 ```
 
@@ -47,10 +47,10 @@ gh api -X POST repos/USERNAME/yossi-islo-promo/pages \
 After a minute or two, the site is live at:
 
 ```
-https://USERNAME.github.io/yossi-islo-promo/
+https://zozo123.github.io/yossi-islo-promo/
 ```
 
-(Replace `USERNAME` with your GitHub username. Check deploy status under the repo's **Actions** tab or Settings → Pages.)
+(Replace `zozo123` with your GitHub username. Check deploy status under the repo's **Actions** tab or Settings → Pages.)
 
 ## Notes
 
