@@ -2,7 +2,7 @@
 
 ## 1. The campaign in one paragraph
 
-YOSSI150 is a personal promo-code campaign for **Islo** (islo.dev), Incredibuild's cloud sandbox platform for AI coding agents ("Everything coding agents need."). A simple landing page hosted free on GitHub Pages serves as Yossi's shareable hub: it explains Islo in one screen and funnels visitors to islo.dev/app.islo.dev with the code **YOSSI150**, which gives a discount at Paddle checkout (Paddle is Islo's confirmed live payment processor; billing is prepaid credit packs). One honest caveat up front: **the "150" in the code name is just a label — it does not define the discount.** The actual discount type and amount (e.g., 15% off, $15 off a credit pack) must be explicitly configured when the discount is created in Paddle (Section 3). Note also that as of this writing, no promo-code mechanism is visible on islo.dev or in the app bundle, so creating this discount in Paddle (and confirming the checkout shows a discount field) is a prerequisite, not an existing feature.
+YOSSI150 is a personal promo-code campaign for **Islo** (islo.dev), Incredibuild's cloud sandbox platform for AI coding agents ("Everything coding agents need."). A simple landing page hosted free on GitHub Pages serves as Yossi's shareable hub: it explains Islo in one screen and funnels visitors to islo.dev/app.islo.dev with the code **YOSSI150**, which gives an **extra $150 USD in Islo bonus credits when buying credits** (Paddle is Islo's confirmed live payment processor; billing is prepaid credit packs). New users also get $50 free signup credits, no card required. At islo.dev's own worked example of $2.46 per 8-hour overnight agent session, the $150 bonus alone funds roughly 60 such sessions, or about 2,100 CPU-hours at $0.07/CPU-hour. One honest caveat up front: **the offer is defined, but the redemption mechanism is not built yet.** No promo-code feature exists on islo.dev or in the app bundle today, and a Paddle discount alone cannot grant bonus credits (it only reduces price — see Section 3), so Islo must build or configure the redemption path before this campaign can launch.
 
 ## 2. Why a personal landing page + link
 
@@ -10,42 +10,45 @@ YOSSI150 is a personal promo-code campaign for **Islo** (islo.dev), Incredibuild
 - **Trust.** A human-named code ("YOSSI150") signals a personal recommendation rather than a generic sale ("SALE10"). People redeem codes from a person they follow at a higher rate because the code itself carries the endorsement. *(This is standard growth-marketing reasoning, not an Islo-specific measured fact.)*
 - **Shareability.** One short, stable URL works everywhere: the last slide of a conference talk, a LinkedIn bio, a podcast host reading it aloud, a QR code on a sticker. The page can change; the link never has to.
 - **Zero infra cost.** GitHub Pages is free static hosting with HTTPS — no server, no build pipeline, no maintenance bill. For a single-page funnel that's all you need.
-- **Measurability.** The funnel has two measurable ends: UTM-tagged traffic arriving at islo.dev (web analytics) and YOSSI150 redemptions reported by Paddle. Comparing the two gives a real conversion rate. *(Whether islo.dev runs PostHog specifically was not verified in research — see Section 7.)*
+- **Measurability.** The funnel has two measurable ends: UTM-tagged traffic arriving at islo.dev (web analytics) and YOSSI150 redemptions reported by the chosen redemption path. Comparing the two gives a real conversion rate. *(Whether islo.dev runs PostHog specifically was not verified in research — see Section 7.)*
 
-## 3. How to set YOSSI150 up in Paddle
+## 3. How to deliver +$150 in credits
 
-Islo's app bundle confirms Paddle Billing is live (live client token + three credit-pack price IDs: `PaddleCreditPack10/50/100`). Setup requires Islo's Paddle dashboard access.
+Islo's app bundle confirms Paddle Billing is live (live client token + three credit-pack price IDs: `PaddleCreditPack10/50/100`). But there is a critical mechanic to get right first:
 
-### Dashboard steps
-1. Go to **Paddle > Catalog > Discounts > New discount** (live: vendors.paddle.com; sandbox: sandbox-vendors.paddle.com).
-2. **Description** (internal only, required): e.g., "Yossi personal promo".
-3. **Type & Amount**: choose `percentage` (amount is a string, "0.01"–"100") or `flat` (requires a `currency_code`). **Decide the real discount here** — e.g., 15% off.
-4. **Code**: `YOSSI150` (1–32 alphanumeric chars).
-5. Leave **Checkout discount code** (`enabled_for_checkout`) on so customers can redeem it at checkout.
-6. Optional: **Usage limit** (`usage_limit`), **Expiration date** (`expires_at`, RFC 3339), **Product restriction** (`restrict_to` — e.g., limit to the three credit-pack price IDs: `pri_01kqs1kg4557tnvkywvj97yrqp`, `pri_01kqs1m0c8jw45n5v2ywvt4mng`, `pri_01kqs1mgt5vppe8eej2kp10s5m`). `recur` matters only for subscriptions; Islo bills prepaid credit packs, so it can stay off.
+> **A Paddle discount reduces the price paid. It cannot grant bonus credits.** "Extra $150 in Islo credits" is an Islo-side balance top-up, so it requires logic in Islo's own backend — Paddle alone can't deliver this offer.
 
-### Minimal API example
-```bash
-curl -X POST https://api.paddle.com/discounts \
-  -H "Authorization: Bearer $PADDLE_API_KEY" \   # needs discount.write scope
-  -H "Content-Type: application/json" \
-  -d '{
-    "description": "Yossi personal promo - 15% off credit packs",
-    "type": "percentage",
-    "amount": "15",
-    "code": "YOSSI150",
-    "enabled_for_checkout": true,
-    "restrict_to": ["pri_01kqs1kg4557tnvkywvj97yrqp",
-                    "pri_01kqs1m0c8jw45n5v2ywvt4mng",
-                    "pri_01kqs1mgt5vppe8eej2kp10s5m"]
-  }'
+Two honest implementation paths, plus one trap to avoid:
+
+### Path A — Islo-side promo-code field (simplest; Paddle untouched)
+Islo adds a "promo code" input in the app (e.g., on the billing page). Redeeming `YOSSI150` while buying credits credits the account with +$150 directly, on top of the purchased pack. No Paddle configuration is required; redemptions are counted in Islo's own database.
+
+### Path B — Paddle-integrated: customData + webhook → credits top-up
+Tie the bonus to a credit-pack purchase. The landing page / app passes the code through checkout as custom data:
+
+```js
+Paddle.Checkout.open({
+  items: [{ priceId: "pri_01kqs1kg4557tnvkywvj97yrqp", quantity: 1 }],
+  customData: { promoCode: "YOSSI150" }
+});
 ```
-Response returns an id like `dsc_01hv...` with status `active`. (Use sandbox-api.paddle.com to test first.)
 
-### How customers apply it
-- **Typed at checkout**: works if `enabled_for_checkout: true` AND the "display discount field on the checkout" option is on in Paddle > Checkout > Checkout settings (per-checkout: `showAddDiscounts`). **Unverified whether Islo's current checkout shows this field** — confirm with a test purchase.
-- **Pre-applied via Paddle.js** (Islo-side change): `Paddle.Checkout.open({ discountCode: "YOSSI150", items: [...] })` — or `discountId`, but never both. Also `Paddle.Checkout.updateCheckout({ discountId })` and `data-discount-code` HTML attributes.
-- **Pre-applied via hosted checkout URL**: append `?discount_code=YOSSI150` (takes precedence over `?discount_id=...`). This is the best option for the landing-page CTA: the button can deep-link with the discount already applied, so visitors never need to type anything. *(Requires Islo to use/expose hosted checkout URLs; unverified for their setup.)*
+Paddle passes `customData` through to transaction webhooks. Islo's backend listens for `transaction.completed`, reads `data.custom_data.promoCode`, and when it equals `YOSSI150`, tops the buyer's balance up by +$150 in bonus credits (idempotently, keyed on transaction id).
+
+Optional variant: also create a `YOSSI150` discount in Paddle purely as a tracking trigger (e.g., a token 1% percentage discount via **Catalog > Discounts** or `POST /discounts`, with `enabled_for_checkout: true` and `restrict_to` the three pack price IDs) so the code can be *typed* at checkout and the webhook handler keys off the discount id instead of customData. That gets Paddle-side redemption counts (`times_used`) for free, but note the discount itself is still only a price reducer — the +$150 still comes from Islo's webhook handler.
+
+### Path C — what NOT to do: a flat $150-off Paddle discount
+A `flat` $150 discount is **not the same offer**: it means the customer *pays $150 less*, not *gets $150 more* — and on packs priced at $10/$50/$100 a $150-off discount exceeds the pack price entirely, which is nonsensical. Don't ship this and call it "+$150 in credits."
+
+### How customers redeem it
+- **Path A**: type `YOSSI150` into Islo's promo-code field (once built). The landing-page link can carry `?coupon=YOSSI150` so the app can pre-fill it.
+- **Path B**: the code rides along invisibly via `customData` (pre-applied from the landing-page CTA), or — with the tracking-discount variant — typed at checkout, which requires Paddle's "display discount field" checkout setting (`showAddDiscounts`) to be on; whether Islo's current checkout shows that field is untested, but it's irrelevant unless the typed-code variant is chosen.
+
+### Launch checklist
+- Build one redemption path from Section 3 and verify a real account receives +$150 bonus credits on top of a purchased credit pack.
+- Confirm `?coupon=YOSSI150&utm_source=yossi&utm_medium=landing&utm_campaign=yossi150` survives the islo.dev → app.islo.dev signup/billing flow.
+- Test the GitHub Pages landing page on desktop and mobile, including both copy-code buttons and all CTAs.
+- Push the final `index.html` to `main`; GitHub Pages should update `https://zozo123.github.io/yossi-islo-promo/` within a minute or two.
 
 ## 4. Five use cases (one per persona)
 
@@ -68,8 +71,8 @@ Mechanics: a Go CLI (it's Go + TypeScript, not Rust — the crab is just brandin
 ### (a) Conference talk — last slide
 QR code + URL on the closing slide:
 > **Try Islo — persistent, secure computers for your coding agents.**
-> `yossieliaz.github.io/islo` → code **YOSSI150** at checkout
-> $50 in free credits on signup · no card required
+> `yossieliaz.github.io/islo` → code **YOSSI150** = extra **$150 in Islo bonus credits**
+> Plus $50 free credits on signup, no card required
 > An 8-hour overnight agent session: $2.46.
 
 *(Replace the URL with the actual GitHub Pages address once published.)*
@@ -79,28 +82,27 @@ QR code + URL on the closing slide:
 >
 > Kicked off an agent before bed, woke up to PRs. The 8-hour session cost $2.46.
 >
-> Start with $50 free credits (no card), and use my code **YOSSI150** when you buy credits: <landing-page-link-with-UTMs>
+> Start with $50 free credits (no card), and my code **YOSSI150** gets you an extra **$150 in Islo bonus credits** when buying credits: <landing-page-link-with-UTMs>
 
 ### (c) Newsletter / podcast mention blurb
-> This episode is supported by my pick of the month: **Islo** (islo.dev), from the team behind Incredibuild. It gives AI coding agents persistent, isolated cloud computers — real VMs, not docker-in-docker — with a security gateway that swaps placeholder credentials for real secrets only at egress. Sign up for $50 in free credits, no card required, and use code **YOSSI150** at checkout for a discount: <landing-page-link>.
+> This episode is supported by my pick of the month: **Islo** (islo.dev), from the team behind Incredibuild. It gives AI coding agents persistent, isolated cloud computers — real VMs, not docker-in-docker — with a security gateway that swaps placeholder credentials for real secrets only at egress. Sign up for $50 in free credits, no card required, and use code **YOSSI150** for an extra **$150 in Islo bonus credits** when buying credits: <landing-page-link>.
 
-*(In all three, state the actual discount — "15% off" or similar — once it's configured in Paddle; don't imply "150" means 150 of anything.)*
+*(Do not publish any of these until the +$150 redemption mechanism from Section 3 is actually live — the code does nothing today.)*
 
 ## 7. Measuring it
 
 Two independent counters, compared monthly:
 
 1. **Top of funnel — UTM traffic.** Every campaign link carries `?utm_source=yossi&utm_medium=<channel>&utm_campaign=yossi150` (vary `utm_medium`: `talk`, `linkedin`, `podcast`). These land in islo.dev's web analytics. *(The brief assumes PostHog; research did not verify which analytics tool islo.dev runs — confirm with the Islo team and that UTM params survive the islo.dev → app.islo.dev signup hop.)*
-2. **Bottom of funnel — Paddle redemptions.** Paddle tracks redemptions per discount code (`times_used` on the discount object, plus transaction reports filtered by discount), so YOSSI150 purchases are countable exactly.
+2. **Bottom of funnel — YOSSI150 redemptions.** Where these are counted depends on the Section 3 path: with Path A, redemptions live in Islo's own database (count of +$150 grants); with Path B, Islo's `transaction.completed` webhook handler counts them (and the optional tracking-discount variant adds Paddle's `times_used` on the discount object plus transaction reports filtered by discount). Either way, YOSSI150 redemptions are countable exactly.
 
-Visits-with-UTM ÷ YOSSI150 redemptions = the campaign's visit-to-paid conversion rate, per channel. If visits are high but redemptions are zero, check first whether the checkout actually exposes the discount (Section 3 caveat) before blaming the copy.
+Visits-with-UTM ÷ YOSSI150 redemptions = the campaign's visit-to-paid conversion rate, per channel. If visits are high but redemptions are zero, check first that the redemption mechanism is actually live and reachable (Section 3) before blaming the copy.
 
 ---
 
 ### Flagged unverified claims (kept honest in the text above)
-- The discount amount behind YOSSI150 does not exist yet; "15% off" is a placeholder until configured in Paddle.
-- No promo/coupon mechanism currently exists anywhere on islo.dev or in the app bundle (grep-verified absence); whether Islo's live Paddle checkout displays a discount-code field is untested.
-- Whether Islo uses hosted Paddle checkout URLs (needed for `?discount_code=` deep links) is unverified.
+- The YOSSI150 offer is now defined (extra $150 USD in Islo bonus credits, per Yossi), but **no redemption mechanism exists yet** — no promo/coupon feature anywhere on islo.dev or in the app bundle (grep-verified absence). One of the Section 3 paths must be built before launch.
+- Whether Islo's live Paddle checkout displays a discount-code field is untested — relevant only if the optional typed-code tracking-discount variant of Path B is chosen; irrelevant under Path A or customData-only Path B.
 - islo.dev's analytics stack (PostHog assumed in the brief) was not verified by research.
 - Credit-pack denominations ($10/$50/$100) are inferred from Paddle config key names, not confirmed prices.
 - Free/Team/Enterprise tier details come from press coverage, not islo.dev itself.

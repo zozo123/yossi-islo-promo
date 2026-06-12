@@ -1,8 +1,11 @@
-# yossi-islo-promo
+# YOSSI150 Promo
 
-A single-page static promo site for the coupon code **YOSSI150** on [islo.dev](https://islo.dev) — Incredibuild's secure, persistent cloud sandbox platform for AI coding agents.
+A single-page static promo site for **YOSSI150** on [islo.dev](https://islo.dev) — Incredibuild's secure, persistent cloud sandbox platform for AI coding agents.
 
-- `index.html` — fully self-contained (inline CSS, one small click-to-copy script, IBM Plex Mono via Google Fonts). No build step, no dependencies.
+The offer: use **YOSSI150** when buying Islo credits to get an extra **$150 in bonus credits** on top of the purchased pack. New accounts also get $50 in free signup credits, no card required.
+
+- `index.html` — fully self-contained landing page (inline CSS, social metadata, two click-to-copy promo-code buttons, IBM Plex Mono via Google Fonts). No build step, no dependencies.
+- `CAMPAIGN.md` — internal campaign brief, launch checklist, implementation notes for the +$150 credit redemption path, and sample promo copy.
 - `.nojekyll` — disables Jekyll processing on GitHub Pages.
 
 ## Deploy to GitHub Pages
@@ -51,6 +54,8 @@ https://zozo123.github.io/yossi-islo-promo/
 ```
 
 (Replace `zozo123` with your GitHub username. Check deploy status under the repo's **Actions** tab or Settings → Pages.)
+
+For ordinary updates after Pages is already enabled, edit `index.html`, commit to `main`, and push. GitHub Pages deploys from the repository root.
 
 ## Notes
 
